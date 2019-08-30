@@ -1,4 +1,6 @@
-const cities = [
+/* eslint-disable comma-dangle */
+/* eslint-disable linebreak-style */
+db.cities.insert([
   {
     city: 'New York',
     growth_from_2000_to_2013: '4.8%',
@@ -8999,4 +9001,4 @@ const cities = [
     rank: '1000',
     state: 'Florida'
   }
-];
+])

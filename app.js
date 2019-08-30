@@ -6,15 +6,15 @@ const chalk = require('chalk');
 
 const app = express();
 const port = process.env.PORT || 8000;
-
-app.use(morgan('dev'));
-
 const cityRouter = express.Router();
 
 cityRouter.route('/').get((req, res) => {
-  res.send('this is my city router');
+  const reply = {
+    message: 'hello welcome to my api'
+  };
+  res.json(reply);
 });
-
+app.use(morgan('dev'));
 app.use('/api', cityRouter);
 app.get('/', (req, res) => {
   res.send('this is my index page');

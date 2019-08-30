@@ -1,0 +1,5 @@
+To import cities into mongodb 
+
+make sure mongodb is running
+
+run 'mongo cityAPI < cityJSON.js' from the cli
