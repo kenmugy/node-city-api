@@ -9,6 +9,13 @@ const port = process.env.PORT || 8000;
 
 app.use(morgan('dev'));
 
+const cityRouter = express.Router();
+
+cityRouter.route('/').get((req, res) => {
+  res.send('this is my city router');
+});
+
+app.use('/api', cityRouter);
 app.get('/', (req, res) => {
   res.send('this is my index page');
 });
