@@ -14,16 +14,22 @@ const port = process.env.PORT || 8000;
 const cityRouter = express.Router();
 const City = require('./models/cityModel');
 // find all books based on state
-cityRouter.route('/cities').get((req, res) => {
-  const query = {};
-  if (req.query.state) {
-    query.state = req.query.state;
-  }
-  City.find(query, (err, cities) => {
-    if (err) return res.send(err);
-    return res.json(cities);
+cityRouter
+  .route('/cities')
+  .get((req, res) => {
+    const query = {};
+    if (req.query.state) {
+      query.state = req.query.state;
+    }
+    City.find(query, (err, cities) => {
+      if (err) return res.send(err);
+      return res.json(cities);
+    });
+  })
+  .post((req, res) => {
+    const city = new City(req.body);
+    res.json(city);
   });
-});
 
 // find one book by id
 cityRouter.route('/cities/:id').get((req, res) => {
@@ -33,6 +39,8 @@ cityRouter.route('/cities/:id').get((req, res) => {
   });
 });
 
+app.use(express.urlencoded({ extended: true })); // also needed to enable express get info from body
+app.use(express.json()); // for handling jsondata from the body
 app.use(morgan('dev'));
 app.use('/api', cityRouter);
 app.get('/', (req, res) => {
