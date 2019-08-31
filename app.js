@@ -13,7 +13,7 @@ const db = mongoose.connect('mongodb://localhost/cityAPI', {
 const port = process.env.PORT || 8000;
 const cityRouter = express.Router();
 const City = require('./models/cityModel');
-
+// find all books based on state
 cityRouter.route('/cities').get((req, res) => {
   const query = {};
   if (req.query.state) {
@@ -24,6 +24,15 @@ cityRouter.route('/cities').get((req, res) => {
     return res.json(cities);
   });
 });
+
+// find one book by id
+cityRouter.route('/cities/:id').get((req, res) => {
+  City.findById(req.params.id, (err, city) => {
+    if (err) return res.send(err);
+    return res.json(city);
+  });
+});
+
 app.use(morgan('dev'));
 app.use('/api', cityRouter);
 app.get('/', (req, res) => {
