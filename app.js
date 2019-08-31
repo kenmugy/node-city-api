@@ -12,7 +12,7 @@ const db = mongoose.connect('mongodb://localhost/cityAPI', {
 });
 const port = process.env.PORT || 8000;
 const City = require('./models/cityModel');
-const cityRouter = require('./routes/cityRouter')(City);
+const cityRouter = require('./routes/cityRouter')(City); // we pass in the City
 
 app.use(express.urlencoded({ extended: true })); // also needed to enable express get info from body
 app.use(express.json()); // for handling jsondata from the body

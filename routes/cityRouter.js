@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 const express = require('express');
-// const City = require('../models/cityModel');
+const City = require('../models/cityModel');
 
-const router = City => {
+const router = () => {
   const cityRouter = express.Router();
 
   cityRouter
@@ -23,12 +24,28 @@ const router = City => {
     });
 
   // find one book by id
-  cityRouter.route('/cities/:id').get((req, res) => {
-    City.findById(req.params.id, (err, city) => {
-      if (err) return res.send(err);
-      return res.json(city);
+  cityRouter
+    .route('/cities/:id')
+    .get((req, res) => {
+      City.findById(req.params.id, (err, city) => {
+        if (err) return res.send(err);
+        return res.json(city);
+      });
+    })
+    .put((req, res) => {
+      City.findById(req.params.id, (err, city) => {
+        if (err) return res.send(err);
+        city.city = req.body.city;
+        city.growth_from_2000_to_2013 = req.body.growth_from_2000_to_2013;
+        city.latitude = req.body.latitude;
+        city.logitude = req.body.longitude;
+        city.population = req.body.population;
+        city.rank = req.body.rank;
+        city.state = req.body.state;
+        city.save();
+        return res.json(city);
+      });
     });
-  });
 
   return cityRouter;
 };
