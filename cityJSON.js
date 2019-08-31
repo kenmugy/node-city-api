@@ -9001,4 +9001,4 @@ db.cities.insert([
     rank: '1000',
     state: 'Florida'
   }
-])
+]);

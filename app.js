@@ -16,8 +16,8 @@ const City = require('./models/cityModel');
 
 cityRouter.route('/cities').get((req, res) => {
   const query = {};
-  if (req.query.rank) {
-    query.rank = req.query.rank;
+  if (req.query.state) {
+    query.state = req.query.state;
   }
   City.find(query, (err, cities) => {
     if (err) return res.send(err);
